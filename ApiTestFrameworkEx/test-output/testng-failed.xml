@@ -3,18 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.test.tekarchapitest.APitestEndtoEnd">
+      <class name="com.test.tekarchapitest.SimpleCRUD">
         <methods>
-          <include name="setupBeforeTest"/>
-          <include name="startreport"/>
-          <include name="Testcase2"/>
-          <include name="setup"/>
-          <include name="Testcase5"/>
-          <include name="getUserDetails"/>
-          <include name="teardownAfterTest"/>
-          <include name="Testcase4"/>
+          <include name="TC2getUserDetails"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- com.test.tekarchapitest.APitestEndtoEnd -->
+      </class> <!-- com.test.tekarchapitest.SimpleCRUD -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

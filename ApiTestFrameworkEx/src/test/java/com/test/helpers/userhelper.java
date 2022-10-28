@@ -48,75 +48,67 @@ public class userhelper {
 		RestAssured.baseURI = url;
 	}
 
-	
-
 	public static void getdata() {
 
-	
 		Response res = RestAssured.given().when().get("/employees");
-		
+
 		res.then().statusCode(200);
-		
+
 		res.then().body("status", Matchers.equalTo("success"));
-		
+
 		System.out.println("number of records=" + res.jsonPath().get("size()"));
 		res.prettyPrint();
 
-		
-
 	}
-public static void createUSerDetails() {
-				
-		Response res = RestAssured.given().contentType(ContentType.JSON).body
-		("{\"id\":25,\"employee_name\":\"test\",\"employee_salary\":123,\"employee_age\":\"23\",\"profile_image\":\"\"}")
-		
-			.when().post("/create"); 
+
+	public static void createUSerDetails() {
+
+		Response res = RestAssured.given().contentType(ContentType.JSON).body(
+				"{\"id\":25,\"employee_name\":\"test\",\"employee_salary\":123,\"employee_age\":\"23\",\"profile_image\":\"\"}")
+
+				.when().post("/create");
 		res.then().statusCode(200);
 		res.prettyPrint();
 		res.then().body("status", Matchers.equalTo("success"));
-		res.then().body("employee_name",Matchers.equalTo("test") );
-		res.then().body("employee_salary",Matchers.equalTo("123") );
-		res.then().body("employee_age",Matchers.equalTo("23") );
-		res.then().body("id",Matchers.equalTo("25") );
-		
+		res.then().body("employee_name", Matchers.equalTo("test"));
+		res.then().body("employee_salary", Matchers.equalTo("123"));
+		res.then().body("employee_age", Matchers.equalTo("23"));
+		res.then().body("id", Matchers.equalTo("25"));
+
 		int id = res.jsonPath().get("[0].data");
 		System.out.println("id=" + id);
 
 	}
-public static void deleteUserInfo() {
-		
-	Response res = RestAssured.given().contentType(ContentType.JSON)
-			.body("{\"id\":\"9196\"}").when()
-			.delete("/delete/9196");
-	res.then().statusCode(200);
-	res.then().contentType(ContentType.JSON);
-	res.then().body("status", Matchers.equalTo("success"));
-	
 
-}
-public static void deleteUserInfo1() {
-	
-	
-	Response res = RestAssured.given().contentType(ContentType.JSON)
-			.body("{\"id\":\"0\"}").when()
-			.delete("/delete/0");
-	res.then().statusCode(400);
-	
-}
+	public static void deleteUserInfo() {
 
-@Test(enabled = true)
-public static void getUserDetails() {
-	
-	Response res = RestAssured.given().when().get("/employee/2");
+		Response res = RestAssured.given().contentType(ContentType.JSON).body("{\"id\":\"9196\"}").when()
+				.delete("/delete/9196");
+		res.then().statusCode(200);
+		res.then().contentType(ContentType.JSON);
+		res.then().body("status", Matchers.equalTo("success"));
 
-	res.then().statusCode(200);
-	res.then().contentType(ContentType.JSON);
-	res.prettyPrint();
-	res.then().body("employee_name",Matchers.equalTo("Garrett Winters"));
-	res.then().body("employee_salary",Matchers.equalTo("170750"));
-	res.then().body("employee_age",Matchers.equalTo("63"));
-	
-					
-	
-}
+	}
+
+	public static void deleteUserInfo1() {
+
+		Response res = RestAssured.given().contentType(ContentType.JSON).body("{\"id\":\"0\"}").when()
+				.delete("/delete/0");
+		res.then().statusCode(400);
+
+	}
+
+	@Test(enabled = true)
+	public static void getUserDetails() {
+
+		Response res = RestAssured.given().when().get("/employee/2");
+
+		res.then().statusCode(200);
+		res.then().contentType(ContentType.JSON);
+		res.prettyPrint();
+		res.then().body("employee_name", Matchers.equalTo("Garrett Winters"));
+		res.then().body("employee_salary", Matchers.equalTo("170750"));
+		res.then().body("employee_age", Matchers.equalTo("63"));
+
+	}
 }
